@@ -1,1 +1,1 @@
-My C/CPP cross-platform libs
+C/Cpp cross-platform libs
