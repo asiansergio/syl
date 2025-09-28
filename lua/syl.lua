@@ -40,9 +40,18 @@ function syl.create_file(path)
 end
 
 function syl.create_dir(path)
-  local command = string.format('mkdir -p "%s"', syl.escape_path(path))
+  if syl.path_exists(path) then
+    return true
+  end
 
-  local ok, _, code = os.execute(command)
+  local mkdir_cmd
+  if syl.is_windows() then
+    mkdir_cmd = "mkdir " .. syl.escape_path(path)
+  else
+    mkdir_cmd = "mkdir -p " .. syl.escape_path(path)
+  end
+
+  local ok, _, code = os.execute(mkdir_cmd)
   if ok then
     return true
   else
