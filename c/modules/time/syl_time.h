@@ -8,14 +8,14 @@ extern "C" {
 // Platform-specific includes and types
 #ifdef _WIN32
     #include <windows.h>
-    typedef LARGE_INTEGER Timepoint;
+    typedef LARGE_INTEGER timepoint;
 #else
     #include <time.h>
-    typedef struct timespec Timepoint;
+    typedef struct timespec timepoint;
 #endif
 
-void GetTime(Timepoint *T);
-double TimeDiff(Timepoint *Start, Timepoint *End);
+void getTime(timepoint *T);
+double timeDiff(timepoint *Start, timepoint *End);
 
 #ifdef __cplusplus
 }

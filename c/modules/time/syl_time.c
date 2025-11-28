@@ -2,27 +2,23 @@
 
 #ifdef _WIN32
 #include <windows.h>
-void GetTime(Timepoint *T)
-{
+void getTime(timepoint *T) {
     QueryPerformanceCounter(T);
 }
 
-double TimeDiff(Timepoint *Start, Timepoint *End)
-{
-    Timepoint Freq;
-    QueryPerformanceFrequency(&Freq);
-    return (double)(End->QuadPart - Start->QuadPart) / Freq.QuadPart;
+double timeDiff(timepoint *start, timepoint *end) {
+    timepoint freq;
+    QueryPerformanceFrequency(&freq);
+    return (double)(end->QuadPart - start->QuadPart) / freq.QuadPart;
 }
 #else
 #include <time.h>
-void GetTime(Timepoint *T)
-{
+void getTime(timepoint *T) {
     clock_gettime(CLOCK_MONOTONIC, T);
 }
 
-double TimeDiff(Timepoint *Start, Timepoint *End)
-{
-    return (End->tv_sec - Start->tv_sec) +
-           (End->tv_nsec - Start ->tv_nsec) / 1e9;
+double TimeDiff(timepoint *start, timepoint *end) {
+    return (end->tv_sec - start->tv_sec) +
+           (end->tv_nsec - start ->tv_nsec) / 1e9;
 }
 #endif
